@@ -1,3 +1,11 @@
+:root {
+  --text-color: #000000; /* Replace with your desired text color */
+  --background-color: #ffffff; /* Replace with your desired background color */
+  --secondary-background-color: #f0f0f0; /* Replace as needed */
+  --primary-color: #1e90ff; /* Replace as needed */
+  --font: 'Arial, sans-serif'; /* Replace with your desired font */
+}
+
 body {
   -webkit-tap-highlight-color: var(--text-color);
   background-color: var(--background-color);
