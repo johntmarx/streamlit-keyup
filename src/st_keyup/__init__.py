@@ -21,7 +21,7 @@ def st_keyup(
     *,
     placeholder: str = "",
     disabled: bool = False,
-    label_visibility: str = "visible",
+    label_visibility: str = "hidden",
     height: Optional[int] = None,  # New height parameter
 ):
     """
