@@ -14,9 +14,11 @@ const Streamlit = {
         sendMessageToStreamlitClient("streamlit:componentReady", {apiVersion: 1});
     },
     setFrameHeight: function(height) {
+        // Ensure the frame height is dynamically set based on the content
         sendMessageToStreamlitClient("streamlit:setFrameHeight", {height: height});
     },
     setComponentValue: function(value) {
+        // Update the component value to Streamlit; no changes needed
         sendMessageToStreamlitClient("streamlit:setComponentValue", {value: value});
     },
     RENDER_EVENT: "streamlit:render",
@@ -24,10 +26,10 @@ const Streamlit = {
         addEventListener: function(type, callback) {
             window.addEventListener("message", function(event) {
                 if (event.data.type === type) {
-                    event.detail = event.data
+                    event.detail = event.data;
                     callback(event);
                 }
             });
         }
     }
-}
+};
