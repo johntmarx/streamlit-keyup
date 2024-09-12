@@ -22,6 +22,7 @@ def st_keyup(
     placeholder: str = "",
     disabled: bool = False,
     label_visibility: str = "visible",
+    height: Optional[int] = None,  # New height parameter
 ):
     """
     Generate a text input that renders on keyup, debouncing the input by the
@@ -36,12 +37,13 @@ def st_keyup(
     on_change is a callback function that will be called when the value changes.
 
     args and kwargs are optional arguments which are passed to the on_change callback
-    function
+    function.
     """
 
     if key is None:
         key = "st_keyup_" + label
 
+    # Add the new height parameter to the component function call
     component_value = _component_func(
         label=label,
         value=value,
@@ -53,6 +55,7 @@ def st_keyup(
         placeholder=placeholder,
         disabled=disabled,
         label_visibility=label_visibility,
+        height=height,  # Pass the height parameter to the component
     )
 
     if on_change is not None:
@@ -125,6 +128,10 @@ def main():
         args=("Hello", "World"),
         kwargs={"foo": "bar"},
     )
+    st.write(value)
+
+    "## Keyup input with custom height"
+    value = st_keyup("Custom height", height=200)  # Example of using the new height parameter
     st.write(value)
 
     "## Standard text input for comparison"
