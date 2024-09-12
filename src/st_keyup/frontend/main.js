@@ -43,21 +43,22 @@ function onRender(event) {
       height,  // New height parameter
     } = event.detail.args;
 
-    const input = document.getElementById("input_box");
-    const label_el = document.getElementById("label");
+    const inputContainer = document.createElement("div");  // Container for textarea
+    inputContainer.classList.add("input");  // Add input class for styling
 
-    if (label_el) {
-      label_el.innerText = label;
-    }
+    const input = document.createElement("textarea");  // Change to textarea for multi-line input
+    input.id = "input_box";
+    input.classList.add("input-box");  // Use a class for styling specific to the textarea
 
-    if (value && !input.value) {
+    const label_el = document.createElement("label");
+    label_el.id = "label";
+    label_el.innerText = label;
+    root.appendChild(label_el);
+    root.appendChild(inputContainer);
+    inputContainer.appendChild(input);
+
+    if (value) {
       input.value = value;
-    }
-
-    if (type === "password") {
-      input.type = "password";
-    } else {
-      input.type = "text";
     }
 
     if (max_chars) {
@@ -71,7 +72,6 @@ function onRender(event) {
     if (disabled) {
       input.disabled = true;
       label_el.disabled = true;
-      // Add "disabled" class to root element
       root.classList.add("disabled");
     }
 
@@ -82,19 +82,19 @@ function onRender(event) {
       Streamlit.setFrameHeight(45);
     }
 
-    if (debounce_time > 0) { // is false if debounce_time is 0 or undefined
+    if (debounce_time > 0) {  // is false if debounce_time is 0 or undefined
       input.onkeyup = debounce(onKeyUp, debounce_time);
     } else {
       input.onkeyup = onKeyUp;
     }
 
-    // Set dynamic height for input box if provided
+    // Set dynamic height for the textarea if provided
     if (height) {
       input.style.height = `${height}px`;
     }
 
-    // Dynamically set the frame height based on the input height, adding extra for padding and label
-    Streamlit.setFrameHeight(height ? height + 45 : 73);  // Adjust frame height
+    // Dynamically set the frame height based on the textarea height, adding extra for padding and label
+    Streamlit.setFrameHeight(height ? height + 75 : 100);  // Adjust frame height
 
     window.rendered = true;
   }
